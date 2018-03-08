@@ -31,7 +31,7 @@ echo Disqus::widget([
 
 // Number of comments (since 1.1.0)
 
-echo Disqus::widget([
+Disqus::widget([
     'shortName' => '<short name>', // Required
     'onlyCountComments' => true,
 ]);
