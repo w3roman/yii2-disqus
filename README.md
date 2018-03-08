@@ -11,6 +11,8 @@ composer require w3lifer/yii2-disqus
 
 ## Usage
 
+Note, that the number of comments and settings related to comments (https://disqus.com/admin/settings/community) are updated approximately every 20 minutes.
+
 ``` php
 /**
  * @var $this \yii\web\View
