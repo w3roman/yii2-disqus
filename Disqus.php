@@ -8,10 +8,8 @@ use yii\base\Widget;
 use yii\web\View;
 
 /**
- * Disqus widget.
  * @see https://disqus.com
  * @see https://disqus.com/admin/settings/universalcode
- * @see https://help.disqus.com/customer/portal/articles/466249-multi-lingual-websites
  */
 class Disqus extends Widget
 {
@@ -19,6 +17,12 @@ class Disqus extends Widget
      * @var string
      */
     public $shortName;
+
+    /**
+     * @var bool
+     * @see https://goo.gl/CL7LvW
+     */
+    public $onlyCountComments = false;
 
     /**
      * @var string
@@ -32,6 +36,7 @@ class Disqus extends Widget
 
     /**
      * @var string
+     * @see https://goo.gl/iFtL1V
      */
     public $language;
 
@@ -53,6 +58,16 @@ class Disqus extends Widget
      */
     public function run()
     {
+        if ($this->onlyCountComments) {
+            $this->view->registerJsFile(
+                'https://' . $this->shortName . '.disqus.com/count.js',
+                [
+                    'async' => true,
+                    'id' => 'dsq-count-scr',
+                ]
+            );
+            return '';
+        }
         $js = 'var disqus_config = function() {';
         if ($this->pageUrl) {
             $js .= 'this.page.url = "' . $this->pageUrl . '";';
@@ -75,13 +90,6 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 JS;
 
-        $this->view->registerJsFile(
-            'https://' . $this->shortName . '.disqus.com/count.js',
-            [
-                'async' => true,
-                'id' => 'dsq-count-scr',
-            ]
-        );
         $this->view->registerJs($js, View::POS_END);
 
         return '<div id="disqus_thread"></div>';
