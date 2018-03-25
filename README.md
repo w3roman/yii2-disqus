@@ -5,7 +5,7 @@
 
 ## Installation
 
-``` shell
+``` sh
 composer require w3lifer/yii2-disqus
 ```
 
