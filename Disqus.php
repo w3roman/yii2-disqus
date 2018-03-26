@@ -69,7 +69,7 @@ class Disqus extends Widget
             );
             return '';
         }
-        $js = 'var disqus_config = function() {';
+        $js = 'var disqus_config = function () {';
         if ($this->pageUrl) {
             $js .= 'this.page.url = "' . $this->pageUrl . '";';
         }
