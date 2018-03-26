@@ -10,6 +10,7 @@ use yii\web\View;
 /**
  * @see https://disqus.com
  * @see https://disqus.com/admin/settings/universalcode
+ * @see https://help.disqus.com/customer/portal/articles/2158629
  */
 class Disqus extends Widget
 {
@@ -20,7 +21,7 @@ class Disqus extends Widget
 
     /**
      * @var bool
-     * @see https://goo.gl/CL7LvW
+     * @see https://help.disqus.com/customer/portal/articles/565624
      */
     public $onlyCountComments = false;
 
