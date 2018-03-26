@@ -37,7 +37,7 @@ class Disqus extends Widget
 
     /**
      * @var string
-     * @see https://goo.gl/iFtL1V
+     * @see https://help.disqus.com/customer/portal/articles/466249
      */
     public $language;
 
