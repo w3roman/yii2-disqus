@@ -27,6 +27,13 @@ echo Disqus::widget([
     'pageUrl' => '<page url>', // Optional
     'pageIdentifier' => '<page identifier>', // Optional
     'language' => '<language>', // Optional; default `Yii::$app->language`
+    'callbacks' => [ // Sinse 1.2.0
+        'onReady' => 'function () { alert("onReady"); }', // String
+        'onNewComment' => [ // Array
+            'function () { alert("onNewComment 1"); }',
+            'function () { alert("onNewComment 2"); }',
+        ],
+    ],
 ]);
 
 // Number of comments (since 1.1.0)

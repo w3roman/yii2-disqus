@@ -2,6 +2,7 @@
 
 namespace w3lifer\yii2;
 
+use Exception;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\base\Widget;
@@ -42,6 +43,29 @@ class Disqus extends Widget
     public $language;
 
     /**
+     * @var array An array whose keys are callback names and values are
+     *            callbacks themselves.
+     * @since 1.2.0
+     */
+    public $callbacks;
+
+    /**
+     * @var array
+     */
+    protected $supportedCallbacks = [
+        'afterRender',
+        'beforeComment',
+        'onIdentify',
+        'onInit',
+        'onNewComment',
+        'onPaginate',
+        'onReady',
+        'preData',
+        'preInit',
+        'preReset',
+    ];
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -80,6 +104,9 @@ class Disqus extends Widget
             'this.language = "' .
                 ($this->language ? $this->language : Yii::$app->language)
             . '";';
+        if ($this->callbacks) {
+            $this->addCallbacks($js);
+        }
         $js .= '};';
 
         $js .= <<<JS
@@ -94,5 +121,25 @@ JS;
         $this->view->registerJs($js, View::POS_END);
 
         return '<div id="disqus_thread"></div>';
+    }
+
+    private function addCallbacks(&$js)
+    {
+        foreach ($this->callbacks as $name => $callbacks) {
+            if (!in_array($name, $this->supportedCallbacks)) {
+                throw new Exception(
+                    'Callback "' . $name . '" does not supported'
+                );
+            }
+            if (is_string($callbacks)) {
+                $callbacks = [$callbacks];
+            }
+            foreach ($callbacks as $callback) {
+                $js .=
+                    'this.callbacks.' . $name . '.push(' .
+                        $callback .
+                    ');';
+            }
+        }
     }
 }
