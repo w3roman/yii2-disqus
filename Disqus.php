@@ -1,6 +1,6 @@
 <?php
 
-namespace w3lifer\yii2;
+namespace w3lifer\Yii2;
 
 use Exception;
 use Yii;

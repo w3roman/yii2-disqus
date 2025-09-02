@@ -17,7 +17,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "w3lifer\\yii2\\": ""
+      "w3lifer\\Yii2\\": ""
     }
   }
 }
